@@ -1,0 +1,11 @@
+game_id,date,opponent,play_type,initiated_by,success,side,3pt_defense_failures,3pt_success_by_opponent,total_fast_breaks,game_result
+011,2025-06-23,Team I,fast_break,PG,1,left,4,9,13,win
+012,2025-06-25,Team J,halfcourt,C,0,center,6,12,3,loss
+013,2025-06-27,Team K,fast_break,PG,1,right,5,10,13,win
+014,2025-06-29,Team L,fast_break,PG,1,left,7,14,15,win
+015,2025-07-01,Team M,halfcourt,SG,1,center,3,6,6,win
+016,2025-07-03,Team N,fast_break,PG,0,right,6,11,11,loss
+017,2025-07-05,Team O,fast_break,PG,1,left,5,10,12,win
+018,2025-07-07,Team P,fast_break,PG,0,center,4,9,10,loss
+019,2025-07-09,Team Q,fast_break,PG,1,left,6,13,14,win
+020,2025-07-11,Team R,fast_break,PG,1,right,7,15,16,win

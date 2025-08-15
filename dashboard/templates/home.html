@@ -1,0 +1,550 @@
+{% load static %}
+{% load markdown_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Agentic AI Coach</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- Enhanced AI Thinking Loader -->
+<div id="loader" class="loader-hidden">
+    <div class="marvel-loader">
+        <div class="arc-reactor">
+            <div class="reactor-core"></div>
+            <div class="reactor-ring ring1"></div>
+            <div class="reactor-ring ring2"></div>
+            <div class="reactor-ring ring3"></div>
+        </div>
+        <div class="particle-system">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="thinking-text">
+            <span class="typing-animation">Heisenberg is analyzing basketball data🤔💬</span>
+            <div class="dots">
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+            </div>
+        </div>
+    </div>
+    <div class="scan-lines"></div>
+</div>
+
+<div id="main-content" class="container">
+    
+    <!-- Enhanced Header -->
+    <header class="main-header">
+        <div class="header-glow"></div>
+        <div class="header-content">
+            <h1 class="marvel-title">
+                <span class="icon-container">
+                    <i class="ph-fill ph-basketball basketball-icon"></i>
+                    <div class="icon-glow"></div>
+                </span>
+                <span class="title-text">BASKETBALL</span>
+                <span class="subtitle-text">AI COACH</span>
+            </h1>
+            <p class="subtitle">
+                <span class="subtitle-highlight">Heisenberg</span> - Your Superhero AI Assistant for Basketball Strategy!
+            </p>
+        </div>
+        <div class="header-particles">
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+            <div class="floating-particle"></div>
+        </div>
+    </header>
+    
+    <main class="dashboard-grid">
+        
+        <div class="grid-col-left">
+            
+            <!-- Performance Chart Card -->
+            <div class="card performance-card" data-card="performance">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-chart-radar"></i> Performance Analysis</h2>
+                    <span class="card-subtitle">Team Combat Statistics</span>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        {% if chart_data %}
+                            <canvas id="performanceRadarChart"></canvas>
+                            <div class="chart-overlay">
+                                <div class="hud-corner top-left"></div>
+                                <div class="hud-corner top-right"></div>
+                                <div class="hud-corner bottom-left"></div>
+                                <div class="hud-corner bottom-right"></div>
+                            </div>
+                        {% else %}
+                            <div class="chart-placeholder">
+                                <div class="placeholder-icon">
+                                    <i class="ph-bold ph-chart-radar"></i>
+                                </div>
+                                <p class="chart-message">Initialize team analysis to generate performance matrix</p>
+                                <div class="pulse-ring"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons Card -->
+            <div class="card actions-card" data-card="actions">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-strategy"></i> Mission Control</h2>
+                    <span class="card-subtitle">Strategic Operations</span>
+                </div>
+                <div class="card-body">
+                    <div class="action-buttons">
+                        <form method="post" class="action-form">
+                            {% csrf_token %}
+                            <button type="submit" name="analyze_general" class="marvel-btn primary-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-content">
+                                    <i class="ph-bold ph-magnifying-glass"></i>
+                                    <span class="btn-text">ANALYZE TEAM DATA</span>
+                                </span>
+                                <div class="btn-particles">
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                </div>
+                            </button>
+                        </form>
+                        
+                        <form method="post" class="action-form">
+                            {% csrf_token %}
+                            <button type="submit" name="analyze_strengths_weaknesses" class="marvel-btn secondary-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-content">
+                                    <i class="ph-bold ph-arrows-split"></i>
+                                    <span class="btn-text">ASSESS STRENGTHS</span>
+                                </span>
+                                <div class="btn-particles">
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                </div>
+                            </button>
+                        </form>
+                        
+                        <form method="post" class="action-form">
+                            {% csrf_token %}
+                            <button type="submit" name="build_strategy" class="marvel-btn accent-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-content">
+                                    <i class="ph-bold ph-brain"></i>
+                                    <span class="btn-text">BUILD STRATEGY</span>
+                                </span>
+                                <div class="btn-particles">
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                </div>
+                            </button>
+                        </form>
+                        
+                        <form method="post" class="action-form">
+                            {% csrf_token %}
+                            <button type="submit" name="clear_reports" class="marvel-btn danger-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-content">
+                                    <i class="ph-bold ph-trash"></i>
+                                    <span class="btn-text">CLEAR REPORTS</span>
+                                </span>
+                                <div class="btn-particles">
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                    <span class="particle-dot"></span>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Cards with Enhanced Styling -->
+            {% if analysis_report %}
+            <div class="card report-card" id="report-analysis" data-card="report">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-chart-line-up"></i> Intelligence Report</h2>
+                    <span class="card-subtitle">General Analysis</span>
+                </div>
+                <div class="card-body report-output">
+                    <div class="report-content">
+                        {{ analysis_report.final_report|convert_markdown }}
+                    </div>
+                    <div class="report-overlay">
+                        <div class="scan-line"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if sw_report %}
+            <div class="card report-card" id="report-sw" data-card="report">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-scales"></i> Combat Assessment</h2>
+                    <span class="card-subtitle">Strengths & Weaknesses</span>
+                </div>
+                <div class="card-body report-output">
+                    <div class="report-content">
+                        {{ sw_report.final_report|convert_markdown }}
+                    </div>
+                    <div class="report-overlay">
+                        <div class="scan-line"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if strategy_report %}
+            <div class="card report-card" id="report-strategy" data-card="report">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-target"></i> Battle Plan</h2>
+                    <span class="card-subtitle">Recommended Strategies</span>
+                </div>
+                <div class="card-body report-output">
+                    <div class="report-content">
+                        {{ strategy_report.final_report|convert_markdown }}
+                    </div>
+                    <div class="report-overlay">
+                        <div class="scan-line"></div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+        
+        <!-- Right Column - Data Management -->
+        <div class="grid-col-right">
+            <div class="card data-card" data-card="data">
+                <div class="card-glow"></div>
+                <div class="card-header">
+                    <h2><i class="ph-bold ph-clipboard-text"></i> Data Archive</h2>
+                    <span class="card-subtitle">Game Intelligence Database</span>
+                </div>
+                <div class="card-body">
+                    
+                    <!-- Add Game Form -->
+                    <div class="add-data-form">
+                        <h3 class="section-title">
+                            <i class="ph-bold ph-plus-circle"></i> 
+                            <span>Register New Mission</span>
+                        </h3>
+                        <form method="post" class="data-form">
+                            {% csrf_token %}
+                            <div class="form-fields">
+                                {{ add_data_form.as_p }}
+                            </div>
+                            <button type="submit" name="add_data" class="marvel-btn form-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-content">
+                                    <i class="ph-bold ph-plus"></i>
+                                    <span class="btn-text">ADD GAME</span>
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Data Table -->
+                    <div class="data-table">
+                        <h3 class="section-title">
+                            <i class="ph-bold ph-table"></i>
+                            <span>Mission Archives</span>
+                        </h3>
+                        <div class="table-wrapper">
+                            {% if csv_data %}
+                            <table class="marvel-table">
+                                <thead>
+                                    <tr>
+                                        {% for col in csv_data.0.keys %}
+                                            <th>{{ col }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in csv_data %}
+                                    <tr>
+                                        {% for val in row.values %}
+                                            <td>{{ val }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% else %}
+                            <div class="no-data">
+                                <div class="no-data-icon">
+                                    <i class="ph-bold ph-database"></i>
+                                </div>
+                                <p>No mission data found in archives</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // Enhanced JavaScript with Marvel animations
+    const forms = document.querySelectorAll('.action-form');
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('main-content');
+    
+    // Button click animations
+    forms.forEach(form => {
+        const button = form.querySelector('.marvel-btn');
+        
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            button.appendChild(ripple);
+            
+            // Activate button particles
+            const particles = button.querySelectorAll('.particle-dot');
+            particles.forEach((particle, index) => {
+                particle.style.animationDelay = `${index * 0.1}s`;
+                particle.classList.add('active');
+            });
+            
+            setTimeout(() => {
+                ripple.remove();
+                particles.forEach(particle => {
+                    particle.classList.remove('active');
+                });
+            }, 600);
+        });
+        
+        form.addEventListener('submit', function() {
+            loader.classList.remove('loader-hidden');
+            mainContent.classList.add('content-hidden');
+        });
+    });
+
+    // Card entrance animations
+    function animateCards() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            card.classList.add('card-animate');
+        });
+    }
+
+    window.addEventListener('load', function() {
+        mainContent.classList.remove('content-hidden');
+        animateCards();
+        
+        const scrollTargetId = "{{ scroll_to_id|default:'' }}";
+        if (scrollTargetId) {
+            const elementToScrollTo = document.getElementById(scrollTargetId);
+            if (elementToScrollTo) {
+                elementToScrollTo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Enhanced Chart with Marvel styling
+        const chartDataString = '{{ chart_data|default:"{}"|safe }}';
+        if (chartDataString && chartDataString !== '{}') {
+            const chartData = JSON.parse(chartDataString);
+            if (chartData.labels) {
+                const ctx = document.getElementById('performanceRadarChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: chartData.labels,
+                        datasets: [{
+                            label: 'Victory Stats',
+                            data: chartData.winData,
+                            backgroundColor: 'rgba(255, 193, 7, 0.2)',
+                            borderColor: '#ffc107',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ffc107',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }, {
+                            label: 'Defeat Analysis',
+                            data: chartData.lossData,
+                            backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                            borderColor: '#dc3545',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#dc3545',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#fff',
+                                    font: {
+                                        family: 'Rajdhani',
+                                        size: 14,
+                                        weight: '600'
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                pointLabels: {
+                                    color: '#fff',
+                                    font: {
+                                        family: 'Rajdhani',
+                                        size: 12,
+                                        weight: '500'
+                                    }
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.6)',
+                                    backdropColor: 'transparent'
+                                },
+                                suggestedMin: 0
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    // Add dynamic background effects
+    function createFloatingElements() {
+        const container = document.querySelector('.container');
+        
+        for (let i = 0; i < 5; i++) {
+            const element = document.createElement('div');
+            element.classList.add('floating-bg-element');
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDelay = Math.random() * 20 + 's';
+            element.style.animationDuration = (20 + Math.random() * 10) + 's';
+            container.appendChild(element);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', createFloatingElements);
+</script>
+
+<style>
+/* Additional embedded styles for complex animations */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.particle-dot.active {
+    animation: particle-burst 0.6s ease-out;
+}
+
+@keyframes particle-burst {
+    0% { transform: scale(1) translate(0, 0); opacity: 1; }
+    100% { transform: scale(0.5) translate(var(--random-x, 20px), var(--random-y, -20px)); opacity: 0; }
+}
+
+.card-animate {
+    animation: card-entrance 0.8s ease-out forwards;
+}
+
+@keyframes card-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.floating-bg-element {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #00d4ff, #ffc107);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float-up linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+
+</body>
+</html>
